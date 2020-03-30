@@ -1,5 +1,0 @@
-Tipos de parametros:
-
-- Query parmans (query): Parametros noamedos enviado na rota após o simbolo de interrogação, geralmente usado em filtros, paginação 
-- Route paramans (paramans): Parametros ultilizados para identificar recursos.
-- Request body (body): Corpo da requisição, utilizado para criar, alterar recursos
