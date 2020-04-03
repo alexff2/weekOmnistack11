@@ -20,7 +20,7 @@ module.exports = {
       ])
     
     res.header('X-Total-Count', count['count(*)'])
-    return res.send(incidents)
+    return res.json(incidents)
   },
   create: async (req, res) => {
     const { title, description, value } = req.body
