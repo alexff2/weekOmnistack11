@@ -36,17 +36,23 @@ module.exports = {
   delete: async ( req, res ) => {
     const { id } = req.params
     const ongs_id = req.headers.authorization
-    const incidents = await connection('incidents')
-      .where( 'id', id )
-      .select( "ongs_id" )
-      .first()
 
-    if (ongs_id !== incidents.ongs_id) {
-      return res.status(401).json({error: "Operation is not permitted"})
+    try {
+      const incidents = await connection('incidents')
+        .where( 'id', id )
+        .select( "ongs_id" )
+        .first()
+  
+      if (ongs_id !== incidents.ongs_id) {
+        return res.status(401).json({error: "Operation is not permitted"})
+      }
+  
+      await connection('incidents').where( "id",id ).delete()
+  
+      return res.status(204).send()
+      
+    } catch (error) {
+      return res.status(404).json({err: "Id não encontrada"})
     }
-
-    await connection('incidents').where( "id",id ).delete()
-
-    return res.status(204).send()
   }
 }
